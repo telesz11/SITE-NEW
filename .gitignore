@@ -1,0 +1,4 @@
+﻿db.json
+.system_generated/
+*.log
+node_modules/

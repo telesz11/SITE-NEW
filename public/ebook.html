@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ebook Cabelo Forte - O guia definitivo baseado em evidências científicas para prevenir, tratar e reverter a calvície e a queda de cabelo.">
+  <title>Cabelo Forte | O Guia Completo e Prático Contra a Calvície</title>
+  <link rel="stylesheet" href="ebook-style.css">
+</head>
+<body>
+
+  <!-- MOBILE MENU BUTTON -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">☰</button>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <a href="index.html" class="sidebar-logo">
+        <div class="logo-icon" style="background-color: var(--primary); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;">C</div>
+        CABELO<span>FORTE</span>
+      </a>
+
+      <div class="sidebar-section-title">Conteúdo do Ebook</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="#" class="nav-link active" data-chapter="capa">Capa do Livro</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="aviso">Aviso Importante</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="introducao">Introdução</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap1">1. Ciclo Capilar</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap2">2. Tipos de Queda</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap3">3. Quando se Preocupar</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap4">4. Tratamentos Clínicos</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap5">5. Terapias Complementares</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap6">6. Transplante Capilar</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap7">7. Hábitos & Nutrição</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap8">8. Mitos & Verdades</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap9">9. Consulta Médica</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="cap10">10. Checklist de Ação</a></li>
+        <li class="nav-item"><a href="#" class="nav-link" data-chapter="conclusao">Conclusão</a></li>
+      </ul>
+
+      <!-- WIDGET 1: DIAGNOSTIC QUIZ -->
+      <div class="sidebar-section-title">Ferramentas Interativas</div>
+      <div class="sidebar-widget quiz-widget">
+        <div class="widget-title">🔍 Identificador de Queda</div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Identifique prováveis causas da sua perda de fios:</p>
+        
+        <div class="quiz-question-group">
+          <p><strong>1. Padrão da queda:</strong></p>
+          <div class="quiz-option" data-question="q1" data-val="efluvio">Caindo em fios inteiros pela casa</div>
+          <div class="quiz-option" data-question="q1" data-val="aag">Entradas e rarefação no topo</div>
+          <div class="quiz-option" data-question="q1" data-val="areata">Falhas circulares lisas</div>
+          <div class="quiz-option" data-question="q1" data-val="quebra">Fios quebrando no meio</div>
+        </div>
+
+        <div class="quiz-question-group" style="margin-top:10px;">
+          <p><strong>2. Tempo de evolução:</strong></p>
+          <div class="quiz-option" data-question="q2" data-val="efluvio">Começou de forma rápida há semanas</div>
+          <div class="quiz-option" data-question="q2" data-val="aag">Afinamento lento há meses/anos</div>
+        </div>
+
+        <div class="quiz-question-group" style="margin-top:10px;">
+          <p><strong>3. Teve estresse/dieta há 3 meses?</strong></p>
+          <div class="quiz-option" data-question="q3" data-val="efluvio">Sim, passei por um desses gatilhos</div>
+          <div class="quiz-option" data-question="q3" data-val="aag">Não me lembro de evento marcante</div>
+        </div>
+
+        <div class="quiz-question-group" style="margin-top:10px;">
+          <p><strong>4. Histórico familiar de calvície:</strong></p>
+          <div class="quiz-option" data-question="q4" data-val="aag">Sim, parentes próximos têm</div>
+          <div class="quiz-option" data-question="q4" data-val="efluvio">Não, calvície não é comum na família</div>
+        </div>
+
+        <button class="quiz-btn" id="submitQuiz">Analisar Sintomas</button>
+        <div class="quiz-result-box" id="quizResult"></div>
+      </div>
+
+      <!-- WIDGET 2: MASSAGE TIMER -->
+      <div class="sidebar-widget">
+        <div class="widget-title">💆 Timer de Massagem</div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Execute a massagem de 4 minutos para irrigar os folículos:</p>
+        <div class="timer-display" id="timerDisplay">4:00</div>
+        <div class="timer-controls">
+          <button class="btn-timer btn-timer-start" id="timerStart">Iniciar</button>
+          <button class="btn-timer btn-timer-reset" id="timerReset">Resetar</button>
+        </div>
+        <div class="timer-instructions" id="timerTip">Aguardando início...</div>
+      </div>
+
+      <!-- WIDGET 3: DILUTION CALCULATOR -->
+      <div class="sidebar-widget">
+        <div class="widget-title">🧪 Calculadora de Diluição</div>
+        <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">Dilua óleos essenciais (alecrim, hortelã) em óleos carreadores (jojoba):</p>
+        
+        <div class="calc-group">
+          <label for="carrierSize">Frasco Carreador:</label>
+          <select id="carrierSize" class="calc-select">
+            <option value="10">10 ml</option>
+            <option value="30" selected>30 ml</option>
+            <option value="50">50 ml</option>
+            <option value="100">100 ml</option>
+          </select>
+        </div>
+
+        <div class="calc-group">
+          <label for="dilutionRate">Concentração Desejada:</label>
+          <select id="dilutionRate" class="calc-select">
+            <option value="1">1% (Couro Sensível)</option>
+            <option value="2" selected>2% (Uso Geral)</option>
+            <option value="3">3% (Ação Intensiva)</option>
+          </select>
+        </div>
+
+        <div class="calc-result" id="calcResult">Carregando...</div>
+      </div>
+
+      <!-- WIDGET 4: DAILY HABIT CHECKLIST -->
+      <div class="sidebar-widget">
+        <div class="widget-title">✅ Hábitos Diários</div>
+        <div id="dailyChecklist">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      
+      <!-- TOP BAR -->
+      <header class="top-bar">
+        <div class="top-bar-title" id="topBarTitle">Capa do Livro</div>
+        <div class="actions-group">
+          <a href="Ebook-Cabelo-Forte.pdf" download class="btn-icon" title="Baixar PDF Original" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">📥</a>
+          <button class="btn-icon" id="toggleDarkMode" title="Alternar Modo Escuro">🌙</button>
+          <button class="btn-icon" id="printPdf" title="Imprimir / Salvar como PDF">🖨️</button>
+        </div>
+      </header>
+
+      <!-- CHAPTER: COVER -->
+      <section class="ebook-chapter active" id="capa">
+        <div class="cover-chapter">
+          <div class="cover-image-container">
+            <img src="images/ebook_cover_new.jpg" alt="Capa do Ebook Cabelo Forte" style="width:100%; height:auto; display:block;">
+          </div>
+          <div class="cover-meta">
+            <span class="chapter-number">Guia Prático e Científico</span>
+            <h1 class="chapter-title" style="font-size: 3rem; margin-bottom:12px;">CABELO FORTE</h1>
+            <p style="font-size:1.25rem; color:var(--text-muted); margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">
+              O guia completo para entender, tratar e reverter a queda de cabelo — da causa biológica ao tratamento ideal para você.
+            </p>
+            <div class="cover-author">Método Cabelo Forte © 2026</div>
+            <button class="btn-start">Iniciar Leitura</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER: AVISO IMPORTANT -->
+      <section class="ebook-chapter" id="aviso">
+        <span class="chapter-number">Aviso de Isenção</span>
+        <h2 class="chapter-title">Antes de começar — um aviso importante</h2>
+        <div class="chapter-body">
+          <div class="alert-box danger">
+            <div class="alert-box-title">⚠️ AVISO MÉDICO LEGAL</div>
+            Este ebook tem caráter exclusivamente educativo e informativo. O conteúdo aqui exposto é baseado em revisão de literatura científica e boas práticas de saúde capilar, mas <strong>não substitui sob nenhuma circunstância uma consulta presencial com um médico dermatologista ou tricologista</strong>.
+          </div>
+          <p>
+            A queda de cabelo (alopecia) é uma condição complexa e multifatorial. Ela pode ser motivada por dezenas de causas distintas, que variam de predisposição genética e oscilações hormonais a deficiências nutricionais graves, disfunções na tireoide, estresse agudo ou até patologias autoimunes.
+          </p>
+          <p>
+            O tratamento que traz resultados fantásticos para uma pessoa pode ser completamente ineficaz (ou até prejudicial) para outra. A definição do tratamento correto depende obrigatoriamente de um diagnóstico preciso, muitas vezes apoiado por exames de sangue, tricoscopia digital e análise do histórico de saúde do paciente.
+          </p>
+          <p>
+            Além disso, os medicamentos mais prescritos e cientificamente validados para combater a calvície (como o minoxidil e os inibidores da enzima 5-alfa-redutase, tais como a finasterida e dutasterida) possuem contraindicações específicas, podem provocar efeitos colaterais em uma parcela dos pacientes e exigem acompanhamento clínico regular.
+          </p>
+          <div class="alert-box info">
+            <div class="alert-box-title">💡 COMO UTILIZAR ESTE GUIA</div>
+            Use as informações contidas nas próximas páginas como um mapa de navegação. Nosso objetivo é municiar você de conhecimento técnico para que, ao se sentar no consultório médico, você saiba exatamente o que perguntar, compreenda as opções terapêuticas sugeridas e participe ativamente da construção do seu plano de recuperação capilar. A decisão final de qual terapia seguir deve sempre ser tomada em conjunto com seu médico.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter" style="visibility: hidden;">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Introdução →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER: INTRODUCAO -->
+      <section class="ebook-chapter" id="introducao">
+        <span class="chapter-number">Introdução</span>
+        <h2 class="chapter-title">Você não está sozinho(a) nisso</h2>
+        <div class="chapter-body">
+          <p>
+            Ver os cabelos caindo no ralo do banheiro, notar as entradas na testa aumentando ou perceber o couro cabeludo cada vez mais exposto sob a luz do espelho é uma experiência emocionalmente dolorosa. A perda de cabelo atinge diretamente a nossa autoestima, a imagem que projetamos no mundo e a nossa autoconfiança.
+          </p>
+          <p>
+            Infelizmente, por ser um assunto cercado de tabus e certa vergonha, o mercado da calvície é inundado de desinformação. Bilhões de dólares são gastos anualmente em produtos milagrosos: shampoos que prometem fazer o cabelo brotar em uma semana, tônicos mágicos sem comprovação científica e suplementos caros que prometem resolver tudo, mas que no final geram apenas frustração e perda de tempo precioso.
+          </p>
+          <p>
+            <strong>A queda de cabelo afeta uma parcela gigantesca da população.</strong> A alopecia androgenética, popularmente conhecida como calvície de padrão masculino ou feminino, afeta mais de 50% dos homens acima de 50 anos e até 40% das mulheres após a menopausa. É uma resposta biológica natural do organismo, não um defeito pessoal ou falta de cuidado.
+          </p>
+          <p>
+            Este guia foi escrito com um propósito muito claro: substituir a ansiedade causada pela perda capilar por <strong>conhecimento prático e baseado em evidências</strong>. Ao longo dos próximos capítulos, você vai aprender a biologia do seu cabelo, entender os diferentes tipos de queda, descobrir as terapias que realmente possuem eficácia clínica comprovada em estudos científicos e traçar um caminho seguro para manter seus fios fortes e reativar aqueles que estão adormecidos.
+          </p>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 1 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 1: CICLO CAPILAR -->
+      <section class="ebook-chapter" id="cap1">
+        <span class="chapter-number">Capítulo 1</span>
+        <h2 class="chapter-title">Como funciona o ciclo capilar</h2>
+        <div class="chapter-body">
+          <p>
+            Para compreender por que o cabelo cai e como as terapias agem, é fundamental entender que o cabelo não é uma estrutura estática. Cada fio em sua cabeça funciona como um órgão independente, passando por um ciclo contínuo de nascimento, crescimento, repouso e queda.
+          </p>
+          <p>
+            Este ciclo de vida capilar é composto por três fases principais:
+          </p>
+          <ul>
+            <li>
+              <strong>Fase Anágena (Fase de Crescimento):</strong> É a fase ativa, onde as células da matriz capilar se dividem rapidamente, gerando a haste capilar. Cerca de 85% a 90% dos fios do seu couro cabeludo estão nesta fase neste exato momento. Ela dura de <strong>2 a 6 anos</strong> (determinado geneticamente). Quanto mais longa for a sua fase anágena, mais comprido o seu cabelo consegue crescer.
+            </li>
+            <li>
+              <strong>Fase Catágena (Fase de Transição):</strong> Uma fase curta de regressão biológica que dura de <strong>2 a 3 semanas</strong>. O folículo encolhe para cerca de um terço de seu tamanho original, e o fio é desconectado de sua fonte de suprimento sanguíneo (a papila dérmica), preparando-se para o repouso.
+            </li>
+            <li>
+              <strong>Fase Telógena (Fase de Repouso e Queda):</strong> Dura cerca de <strong>3 meses</strong> (100 dias). O fio inativo permanece preso ao couro cabeludo enquanto um novo fio anágeno começa a se formar na base do folículo. Ao final desta fase, o fio antigo cai naturalmente (fase de desprendimento ou <em>exógena</em>) para dar espaço ao novo broto.
+            </li>
+          </ul>
+          <p>
+            <strong>O que é normal?</strong> É perfeitamente saudável e esperado perder entre <strong>50 e 100 fios de cabelo todos os dias</strong>. Isso representa apenas o desprendimento natural dos fios que terminaram sua fase telógena.
+          </p>
+          <h3>O Fenômeno da Miniaturização</h3>
+          <p>
+            Na alopecia androgenética (calvície genética), ocorre uma alteração drástica nesse ciclo. Sob a ação de andrógenos, a fase de crescimento (anágena) vai se tornando cada vez mais curta a cada ciclo sucessivo. Ao mesmo tempo, a fase de repouso (telógena) se prolonga.
+          </p>
+          <p>
+            Como consequência, o folículo capilar passa por um processo chamado <strong>miniaturização folicular</strong>: ele diminui de tamanho fisicamente, produzindo fios progressivamente mais finos, curtos e claros (conhecidos como fios <em>vellus</em> ou penugem), até que o folículo atrofia por completo e para de produzir qualquer fio.
+          </p>
+          <div class="alert-box info">
+            <div class="alert-box-title">💡 A RAZÃO DA DEMORA NOS TRATAMENTOS</div>
+            Como os fios miniaturizados precisam entrar em uma nova fase anágena para recuperar sua espessura e força, <strong>qualquer tratamento capilar sério leva no mínimo de 3 a 6 meses para mostrar resultados visíveis</strong> no espelho. Medicamentos e loções estimulam a retomada da fase anágena, mas a biologia do fio tem o seu próprio tempo que não pode ser acelerado.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 2 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2: TIPOS DE QUEDA -->
+      <section class="ebook-chapter" id="cap2">
+        <span class="chapter-number">Capítulo 2</span>
+        <h2 class="chapter-title">Os principais tipos de queda de cabelo</h2>
+        <div class="chapter-body">
+          <p>
+            A queda de cabelo não é uma doença única. Antes de comprar qualquer produto ou iniciar qualquer aplicação, você precisa saber qual tipo de queda está enfrentando. Tratar a queda errada com a medicação errada é o principal motivo de falha terapêutica.
+          </p>
+          <p>
+            Abaixo, detalhamos os quatro tipos mais comuns de alteração capilar:
+          </p>
+          
+          <h3>1. Alopecia Androgenética (Calvície Genética)</h3>
+          <p>
+            É a causa mais comum de perda de cabelos, de origem genética e hormonal. É provocada pela sensibilidade dos folículos capilares à <strong>Di-hidrotestosterona (DHT)</strong>, um hormônio andrógeno derivado da testosterona pela ação da enzima 5-alfa-redutase.
+          </p>
+          <p>
+            A DHT liga-se aos receptores nos folículos capilares geneticamente suscetíveis, iniciando o processo de miniaturização. Nos homens, manifesta-se tipicamente pelo recuo da linha de frente (entradas) e rarefação na coroa (topo). Nas mulheres, a linha de frente costuma ser preservada, ocorrendo um afinamento difuso centrado no topo da cabeça, alargando a risca do cabelo (padrão de árvore de natal).
+          </p>
+
+          <h3>2. Eflúvio Telógeno (Queda Difusa e Aguda)</h3>
+          <p>
+            Caracteriza-se por uma queda intensa, repentina e difusa (por toda a cabeça). Ocorre quando um gatilho biológico faz com que uma grande porcentagem de fios em fase anágena entre prematuramente na fase telógena (queda) de uma vez.
+          </p>
+          <p>
+            Os gatilhos mais comuns acontecem de <strong>2 a 3 meses antes</strong> do início visível da queda e incluem: estresse emocional ou físico severo, febre alta, infecções agudas (como Dengue ou COVID-19), dietas extremamente restritivas, perda rápida de peso, cirurgias de grande porte, parto (eflúvio pós-parto) ou suspensão de anticoncepcionais. A boa notícia é que o eflúvio telógeno costuma ser temporário e autolimitado, revertendo-se em 6 meses caso o gatilho inicial tenha sido sanado.
+          </p>
+
+          <h3>3. Alopecia Areata (Condição Autoimune)</h3>
+          <p>
+            Uma doença inflamatória crônica em que o sistema imunológico do indivíduo ataca por engano as células do próprio folículo capilar, forçando o fio a entrar na fase telógena e cair.
+          </p>
+          <p>
+            Manifesta-se classicamente por <strong>falhas circulares ou ovais completamente lisas e sem pelos</strong>, que surgem repentinamente no couro cabeludo ou na barba. A alopecia areata não destrói o folículo de forma definitiva, o que significa que o cabelo pode voltar a crescer por completo, mas exige tratamentos médicos específicos (como infiltração local de corticoides ou imunomoduladores).
+          </p>
+
+          <h3>4. Alopecias Cicatriciais (Raras e Graves)</h3>
+          <p>
+            Um grupo de patologias raras (como o Líquen Plano Pilar, Alopecia Frontal Fibrosante e Lúpus Discoide) em que uma inflamação intensa destrói as células-tronco do folículo capilar de forma permanente, substituindo o folículo por tecido cicatricial.
+          </p>
+          <p>
+            Neste caso, a perda de cabelo é <strong>irreversível</strong> na região afetada, pois o folículo deixa de existir. O diagnóstico precoce com biópsia do couro cabeludo é crítico para frear a progressão da doença e salvar os fios remanescentes.
+          </p>
+
+          <div class="alert-box info">
+            <div class="alert-box-title">💡 DICA CLÍNICA</div>
+            Estes tipos de queda não são mutuamente exclusivos. Uma pessoa com Alopecia Androgenética (calvície genética) pode perfeitamente passar por um episódio de Eflúvio Telógeno decorrente de estresse ou deficiência vitamínica, acelerando dramaticamente a perda de cabelo. O exame minucioso de <strong>tricoscopia digital</strong> feito por um especialista diferencia cada quadro com precisão.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 3 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3: QUANDO SE PREOCUPAR -->
+      <section class="ebook-chapter" id="cap3">
+        <span class="chapter-number">Capítulo 3</span>
+        <h2 class="chapter-title">Como saber se sua queda é motivo de atenção</h2>
+        <div class="chapter-body">
+          <p>
+            Muitas pessoas entram em desespero ao ver alguns fios no travesseiro ou na escova, iniciando tratamentos caros sem necessidade real. Outras ignoram o afinamento lento e gradual por anos, perdendo a janela de ouro onde os folículos ainda poderiam ser recuperados. Aprenda a avaliar os sinais de alerta do seu cabelo.
+          </p>
+          
+          <h3>Sinais de que você deve procurar um profissional:</h3>
+          <ul>
+            <li><strong>Queda volumosa persistente:</strong> Queda notavelmente maior do que o seu padrão normal que se estende por mais de 8 a 12 semanas consecutivas.</li>
+            <li><strong>Afinamento localizado:</strong> Perda de densidade perceptível em áreas específicas (linha de frente recuando, topo da cabeça aparecendo sob a luz, risca do cabelo alargando).</li>
+            <li><strong>Mudança na textura:</strong> Fios que costumavam ser grossos e fortes tornando-se extremamente finos, fracos, claros e quebradiços.</li>
+            <li><strong>Sintomas no couro cabeludo:</strong> Presença de coceira intensa, queimação, dor na raiz (tricodinia), vermelhidão, descamação excessiva ou feridas associadas à queda de cabelo.</li>
+            <li><strong>Falhas localizadas:</strong> Surgimento de áreas circulares ou ovais totalmente desprovidas de fios.</li>
+          </ul>
+
+          <h3>O Teste do Puxão Suave (Pull Test Caseiro)</h3>
+          <p>
+            Existe um teste clínico simples que médicos utilizam em consultório e que você pode reproduzir em casa para ter um indicativo (nunca um diagnóstico definitivo) do nível de atividade da sua queda de cabelo:
+          </p>
+          <ol>
+            <li>Pegue uma mecha de cabelo contendo aproximadamente <strong>40 a 60 fios</strong> entre o polegar e o indicador, bem próximo à raiz.</li>
+            <li>Puxe a mecha de forma firme, porém suave, deslizando os dedos ao longo de toda a haste capilar até as pontas.</li>
+            <li>Repita o teste em três áreas distintas do couro cabeludo: topo, lateral e nuca.</li>
+          </ol>
+          <p>
+            <strong>Como interpretar:</strong>
+          </p>
+          <ul>
+            <li>Se saírem menos de <strong>3 fios</strong> por puxada, sua queda está dentro dos limites da normalidade.</li>
+            <li>Se saírem <strong>6 ou mais fios</strong> em cada mecha, isso aponta para uma fase ativa de queda de cabelo (eflúvio ou fase de atividade de alopecia), sugerindo a necessidade de investigação profissional.</li>
+          </ul>
+
+          <div class="alert-box danger">
+            <div class="alert-box-title">⚠️ ATENÇÃO</div>
+            Evite fazer o teste do puxão logo após lavar ou escovar o cabelo, pois a tração mecânica do banho e da escovação já remove a maior parte dos fios telógenos soltos, mascarando o resultado real do teste.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 4 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4: TRATAMENTOS CLINICOS -->
+      <section class="ebook-chapter" id="cap4">
+        <span class="chapter-number">Capítulo 4</span>
+        <h2 class="chapter-title">Tratamentos com respaldo científico</h2>
+        <div class="chapter-body">
+          <p>
+            No universo dos tratamentos para alopecia androgenética, existem poucas substâncias que passaram no teste rigoroso de ensaios clínicos randomizados de larga escala e foram aprovadas pelas agências de saúde globais (como FDA e ANVISA). Abaixo estão os pilares da terapia capilar moderna:
+          </p>
+          
+          <h3>1. Minoxidil (Estimulante de Crescimento)</h3>
+          <p>
+            Originalmente desenvolvido como um vasodilatador oral para hipertensão arterial, percebeu-se que o minoxidil promovia o crescimento capilar como efeito colateral.
+          </p>
+          <ul>
+            <li>
+              <strong>Como age:</strong> O minoxidil atua abrindo os canais de potássio na musculatura lisa vascular, promovendo vasodilatação local. Isso aumenta o fluxo sanguíneo, oxigênio e nutrientes para a papila dérmica. Além disso, ele encurta a fase telógena e <strong>prolonga a fase anágena</strong> (crescimento), forçando fios finos a crescerem mais grossos.
+            </li>
+            <li>
+              <strong>Minoxidil Tópico (2% e 5%):</strong> Aplicado em loção ou espuma diretamente no couro cabeludo 1 a 2 vezes ao dia. A versão em espuma irrita menos o couro por não conter propilenoglicol.
+            </li>
+            <li>
+              <strong>Minoxidil Oral (Baixa Dose):</strong> Uma tendência crescente na dermatologia. Em doses muito baixas (0,5mg a 5mg diários), o minoxidil oral apresenta alta eficácia e excelente adesão (evitando o aspecto pegajoso da loção), mas exige monitoramento médico cuidadoso de pressão arterial e retenção de líquidos.
+            </li>
+          </ul>
+          <div class="alert-box danger">
+            <div class="alert-box-title">⚠️ O EFEITO SHEDDING (QUEDA INICIAL)</div>
+            Nas primeiras 2 a 6 semanas de uso do minoxidil, <strong>pode ocorrer um aumento temporário na queda de cabelo</strong>. Isso é chamado de <em>shedding</em>. Não entre em pânico! O minoxidil está apenas forçando os fios finos e fracos na fase telógena a caírem para dar início imediato a uma nova fase anágena de fios fortes. É sinal de que o tratamento está funcionando.
+          </div>
+
+          <h3>2. Finasterida e Dutasterida (Bloqueadores de DHT)</h3>
+          <p>
+            Se o minoxidil é o "acelerador" do crescimento, a finasterida e a dutasterida são o "freio" da calvície. Eles combatem a causa hormonal primária da alopecia androgenética.
+          </p>
+          <ul>
+            <li>
+              <strong>Como agem:</strong> Inibem a enzima <strong>5-alfa-redutase</strong>, bloqueando a conversão de testosterona em di-hidrotestosterona (DHT).
+            </li>
+            <li>
+              <strong>Finasterida:</strong> Inibe a enzima do Tipo II. Reduz os níveis séricos de DHT em cerca de 70%. A dose padrão recomendada é de 1mg ao dia por via oral.
+            </li>
+            <li>
+              <strong>Dutasterida:</strong> Um inibidor mais potente que bloqueia tanto o Tipo I quanto o Tipo II da enzima. Reduz o DHT em mais de 90%. É frequentemente utilizada em casos mais resistentes ou avançados.
+            </li>
+            <li>
+              <strong>Efeitos Colaterais Sexuais:</strong> Um tema de grande preocupação. Estudos clínicos robustos mostram que uma pequena porcentagem dos pacientes masculinos (cerca de 1% a 2%) relata disfunção erétil, perda de libido ou diminuição do volume ejaculatório. Na imensa maioria dos casos, estes efeitos são totalmente reversíveis com a interrupção do uso.
+            </li>
+          </ul>
+
+          <h3>3. Tratamentos Hormonais Femininos</h3>
+          <p>
+            Como as mulheres possuem níveis muito menores de testosterona circulante, a alopecia feminina frequentemente responde a outras vias hormonais. O bloqueio androgênico em mulheres é feito com medicamentos como a <strong>Espironolactona</strong> (um diurético poupador de potássio com forte ação antiandrogênica), o <strong>Acetato de Ciproterona</strong> ou a <strong>Flutamida</strong>.
+          </p>
+          <div class="alert-box danger">
+            <div class="alert-box-title">⚠️ PERIGO DE TERATOGENICIDADE</div>
+            Medicamentos bloqueadores de DHT como Finasterida e Dutasterida, bem como a Espironolactona, <strong>são terminantemente contraindicados para mulheres em idade fértil que não utilizem métodos contraceptivos eficazes</strong>, pois podem causar feminilização de fetos masculinos em caso de gravidez.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 5 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 5: TERAPIAS COMPLEMENTARES -->
+      <section class="ebook-chapter" id="cap5">
+        <span class="chapter-number">Capítulo 5</span>
+        <h2 class="chapter-title">Tratamentos complementares e procedimentos</h2>
+        <div class="chapter-body">
+          <p>
+            Além do tratamento clínico de base com medicamentos orais e tópicos, a medicina capilar evoluiu para incorporar procedimentos de consultório e soluções adjuvantes que potencializam a regeneração folicular.
+          </p>
+          
+          <h3>1. Microagulhamento Capilar (Drug Delivery)</h3>
+          <p>
+            Procedimento que consiste em produzir microperfurações no couro cabeludo utilizando um rolo de agulhas (Dermaroller) ou caneta elétrica microagulhadora (Dermapen).
+          </p>
+          <ul>
+            <li><strong>Mecanismo:</strong> O microdano controlado estimula o processo natural de cicatrização da pele, promovendo a liberação de fatores de crescimento derivados de plaquetas (PDGF) e fator de crescimento epidérmico (EGF) na área folicular.</li>
+            <li><strong>Synergy (Drug Delivery):</strong> As microperfurações funcionam como canais abertos temporários que aumentam a penetração de ativos tópicos (como o próprio minoxidil) aplicados imediatamente após o procedimento.</li>
+          </ul>
+          <div class="alert-box danger">
+            <div class="alert-box-title">⚠️ CUIDADO COM INFECÇÕES</div>
+            O microagulhamento deve ser feito sob rígidas condições de higiene. Agulhas devem ser estéreis e descartáveis. <strong>Não aplique minoxidil imediatamente após o microagulhamento com agulhas longas (acima de 0.5mm)</strong>, pois isso pode fazer com que a medicação entre na corrente sanguínea de forma sistêmica, provocando palpitações cardíacas e queda brusca da pressão arterial. Aguarde 24 horas.
+          </div>
+
+          <h3>2. Laser de Baixa Intensidade (LLLT - Low Level Laser Therapy)</h3>
+          <p>
+            Dispositivos em formato de capacetes, bonés ou tiaras que emitem luz vermelha fria colimada (comprimento de onda em torno de 650nm) diretamente sobre o couro cabeludo.
+          </p>
+          <ul>
+            <li><strong>Como age:</strong> A luz vermelha penetra no tecido e é absorvida pelo citocromo c oxidase presente nas mitocôndrias das células foliculares (fotobiomodulação). Isso estimula a respiração celular, eleva a produção de Adenosina Trifosfato (ATP) e aumenta o metabolismo celular, tirando o fio da fase de repouso.</li>
+          </ul>
+
+          <h3>3. Plasma Rico em Plaquetas (PRP) e Intradermoterapia</h3>
+          <ul>
+            <li>
+              <strong>PRP (Plasma Rico em Plaquetas):</strong> Coleta-se o sangue do próprio paciente, centrifugando-o para separar e concentrar a fração plasmática contendo alta densidade de plaquetas. Este plasma concentrado em fatores de crescimento biológicos é injetado diretamente nas áreas afetadas do couro cabeludo.
+            </li>
+            <li>
+              <strong>Intradermoterapia (Mesoterapia):</strong> Microinjeções de um "coquetel" de medicamentos, vitaminas, minerais, aminoácidos e bloqueadores de DHT (como a dutasterida) direto na derme capilar, agindo localmente e reduzindo a necessidade de doses sistêmicas orais.
+            </li>
+          </ul>
+
+          <h3>4. Fitoterápicos e Bloqueadores de DHT Naturais</h3>
+          <p>
+            Para quem busca alternativas naturais ou não tolera os efeitos colaterais de medicamentos sintéticos:
+          </p>
+          <ul>
+            <li><strong>Saw Palmetto (Serenoa repens):</strong> Extrato lipofílico de bagas que demonstra capacidade de inibir de forma leve a enzima 5-alfa-redutase, reduzindo o acúmulo de DHT nos folículos.</li>
+            <li><strong>Rosemary Oil (Óleo Essencial de Alecrim):</strong> Um estudo clínico de referência publicado em 2015 comparou o óleo essencial de alecrim ao minoxidil 2%. Após 6 meses de uso diário, ambos os grupos apresentaram aumento de contagem de fios equivalente, com a vantagem do óleo de alecrim causar menos coceira no couro cabeludo. Deve ser diluído em óleo carreador (como jojoba).</li>
+          </ul>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 6 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 6: TRANSPLANTE CAPILAR -->
+      <section class="ebook-chapter" id="cap6">
+        <span class="chapter-number">Capítulo 6</span>
+        <h2 class="chapter-title">Quando considerar o transplante capilar</h2>
+        <div class="chapter-body">
+          <p>
+            O transplante capilar é a única solução definitiva para reestabelecer fios em áreas onde o folículo capilar já cicatrizou ou atrofiou por completo, ou seja, onde a pele já se encontra lisa e brilhante, incapaz de responder a loções estimulantes.
+          </p>
+          
+          <h3>Técnicas Modernas de Transplante:</h3>
+          <ul>
+            <li>
+              <strong>Técnica FUE (Follicular Unit Extraction):</strong> É a técnica mais moderna e procurada. Consiste na extração individualizada de unidades foliculares (folículo por folículo) da área doadora utilizando micro-punches cirúrgicos (geralmente entre 0.7mm e 0.9mm). Não deixa cicatriz linear, a recuperação pós-operatória é rápida (cerca de 3 a 5 dias) e permite retirar fios também da barba ou tórax (técnica <em>Body Hair Transplant</em>).
+            </li>
+            <li>
+              <strong>Técnica FUT (Follicular Unit Transplantation):</strong> Também conhecida como técnica da "faixa". O cirurgião remove uma fina faixa linear de couro cabeludo da área doadora posterior (nuca) e a sutura. Essa faixa é dissecada sob microscópios de alta resolução para separar as unidades foliculares. Deixa uma cicatriz linear fina na nuca, que é facilmente coberta por cabelos mais longos, sendo indicada para casos de mega-sessões.
+            </li>
+          </ul>
+
+          <h3>Alinhamento de Expectativas Realistas:</h3>
+          <p>
+            O transplante capilar é uma redistribuição de fios existentes, não a criação de novos fios. Se você retira 4.000 folículos da nuca e os coloca nas entradas, você diminui a densidade da nuca para aumentar a da frente. Por isso, a qualidade e o tamanho da sua <strong>área doadora</strong> são fatores limitantes fundamentais.
+          </p>
+          <p>
+            O resultado final de um transplante cirúrgico leva de <strong>9 a 12 meses</strong> para aparecer por completo. Nos primeiros 30 dias após a cirurgia, ocorre a queda natural dos fios transplantados devido ao trauma cirúrgico (chamado <em>shock loss</em>). O folículo, no entanto, permanece vivo na derme e começará a produzir novos fios permanentemente a partir do terceiro mês.
+          </p>
+
+          <div class="alert-box danger">
+            <div class="alert-box-title">⚠️ O MAIOR ERRO DO TRANSPLANTE</div>
+            O transplante capilar <strong>não cura a alopecia androgenética de base</strong>. Ele apenas move fios que não possuem a sensibilidade genética ao DHT para a área calva. Os fios nativos da região receptora que ainda restam continuarão sofrendo a miniaturização provocada pelo DHT. Se você fizer o transplante e não mantiver um tratamento clínico de manutenção (como finasterida/minoxidil), a calvície continuará avançando ao redor dos fios transplantados, gerando um aspecto estético bizarro (como "ilhas" isoladas de cabelos).
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 7 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 7: HABITOS E NUTRICAO -->
+      <section class="ebook-chapter" id="cap7">
+        <span class="chapter-number">Capítulo 7</span>
+        <h2 class="chapter-title">Nutrição e hábitos que influenciam a saúde capilar</h2>
+        <div class="chapter-body">
+          <p>
+            O cabelo é considerado um tecido não essencial pelo nosso corpo. Em termos de sobrevivência biológica, o organismo sempre priorizará enviar nutrientes vitais para o coração, fígado e cérebro antes de enviá-los para os folículos capilares. Por isso, qualquer deficiência nutricional leve é sentida primeiramente na qualidade e quantidade dos seus fios.
+          </p>
+          
+          <h3>Nutrientes Críticos para a Formação do Fio:</h3>
+          <ul>
+            <li>
+              <strong>Ferro (e Ferritina):</strong> O ferro é crucial para a síntese de hemoglobina, que transporta oxigênio para as células de divisão rápida da matriz capilar. Níveis baixos de ferritina (reserva de ferro) no sangue, mesmo sem causar anemia clássica, são uma das principais causas ocultas de eflúvio telógeno em mulheres. Médicos capilares recomendam manter a ferritina acima de <strong>70 ng/ml</strong> para otimizar o crescimento.
+            </li>
+            <li>
+              <strong>Zinco:</strong> Um mineral cofator essencial para centenas de enzimas corporais, envolvido na síntese de proteínas e divisão celular no folículo. A deficiência de zinco está intimamente ligada a fios secos, quebradiços e queda acentuada.
+            </li>
+            <li>
+              <strong>Vitamina D3:</strong> A vitamina D desempenha papel fundamental na regulação da transcrição de genes que controlam o ciclo folicular. Receptores de vitamina D estão presentes nos queratinócitos do folículo capilar. Níveis sanguíneos recomendados de vitamina D para saúde capilar devem estar preferencialmente acima de <strong>40 ng/ml</strong>.
+            </li>
+            <li>
+              <strong>Proteínas:</strong> O cabelo é constituído por mais de 85% de <strong>queratina</strong>, uma proteína fibrosa rica no aminoácido cisteína. Dietas pobres em proteínas ou com baixa absorção proteica impedem o folículo de construir fios grossos e resistentes.
+            </li>
+          </ul>
+
+          <h3>Higiene e Saúde do Couro Cabeludo</h3>
+          <p>
+            O couro cabeludo é o "solo" onde o cabelo cresce. Um solo inflamado ou obstruído prejudica a germinação e saúde dos fios.
+          </p>
+          <ul>
+            <li><strong>Controle da Oleosidade e Caspa:</strong> O excesso de sebo alimenta a proliferação do fungo <em>Malassezia</em>, causador da dermatite seborreica. A inflamação crônica gerada pela dermatite enfraquece a ancoragem do fio e acelera a queda.</li>
+            <li><strong>Shampoo com Cetoconazol:</strong> Um excelente aliado no tratamento da alopecia. O cetoconazol é um antifungicida potente contra a dermatite seborreica e possui estudos demonstrando uma leve capacidade antiandrogênica local (bloqueando receptores de DHT no couro cabeludo).</li>
+          </ul>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 8 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 8: MITOS E VERDADES -->
+      <section class="ebook-chapter" id="cap8">
+        <span class="chapter-number">Capítulo 8</span>
+        <h2 class="chapter-title">Mitos e verdades desmascarados</h2>
+        <div class="chapter-body">
+          <p>
+            Por ser um tema que mexe muito com a vaidade e o desespero de milhões de pessoas, a calvície é cercada de folclores urbanos e crenças infundadas. Vamos esclarecer o que é fato e o que é pura ficção científica popular.
+          </p>
+          
+          <div class="alert-box info">
+            <div class="alert-box-title">"Usar boné ou chapéu sufoca o cabelo e causa calvície."</div>
+            <strong>MITO.</strong> Os folículos capilares recebem oxigênio e nutrientes através da microcirculação sanguínea interna da derme, e não do ar externo. O boné não sufoca a raiz. O único cuidado necessário é evitar o uso de bonés apertados por longas horas (que podem gerar tração excessiva na linha de frente) ou usá-los com o cabelo molhado, o que abafa o couro cabeludo e estimula a proliferação de fungos e caspa.
+          </div>
+
+          <div class="alert-box info">
+            <div class="alert-box-title">"A genética da calvície é herdada apenas pelo lado materno (avô materno)."</div>
+            <strong>MITO PARCIAL.</strong> Embora o gene do receptor androgênico (AR) esteja localizado no cromossomo X (que os homens herdam de suas mães), a genética da alopecia androgenética é <strong>poligênica</strong>. Envolve a transmissão de dezenas de outros genes espalhados por cromossomos autossômicos que podem ser herdados tanto do pai quanto da mãe. Se seu pai é calvo ou sua mãe tem afinamento capilar, você possui predisposição de ambos os lados.
+          </div>
+
+          <div class="alert-box info">
+            <div class="alert-box-title">"Cortar ou raspar o cabelo com frequência faz com que ele cresça mais forte e grosso."</div>
+            <strong>MITO.</strong> O corte de cabelo é feito na haste capilar externa, que é composta de queratina morta. O bulbo capilar, vivo sob a pele, não possui nenhuma conexão neural que detecte se a haste foi cortada. A sensação de que o cabelo raspado nasce mais grosso ocorre porque o fio natural tem formato cônico (ponta fina), e o corte cria uma terminação reta e plana que parece mais áspera e densa ao toque. A densidade real e o diâmetro do fio nascido são inalterados pelo corte.
+          </div>
+
+          <div class="alert-box info">
+            <div class="alert-box-title">"Se eu parar de usar minoxidil, todo o meu cabelo vai cair de uma vez."</div>
+            <strong>MITO PARCIAL.</strong> A interrupção do minoxidil não causa uma queda destrutiva imediata ou maior do que você teria sem ele. O que acontece é que todos os fios que eram sustentados e mantidos na fase anágena pela loção entrarão progressivamente na fase telógena nas semanas seguintes à suspensão. Ao longo de 3 a 6 meses, o seu cabelo retornará exatamente ao estágio evolutivo em que estaria caso você nunca tivesse iniciado o tratamento. O ganho é perdido, pois a calvície é uma condição crônica que exige estímulo contínuo.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 9 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 9: CONSULTA MEDICA -->
+      <section class="ebook-chapter" id="cap9">
+        <span class="chapter-number">Capítulo 9</span>
+        <h2 class="chapter-title">Montando seu plano com acompanhamento profissional</h2>
+        <div class="chapter-body">
+          <p>
+            O segredo do sucesso no controle da queda capilar é a consistência. A calvície é uma corrida de maratona, não um tiro de 100 metros. A automedicação ou a compra impulsiva de cosméticos frequentemente geram cansaço financeiro e psicológico antes mesmo do tratamento ter tempo de fazer efeito.
+          </p>
+          
+          <h3>O que esperar de uma consulta médica de excelência:</h3>
+          <ol>
+            <li>
+              <strong>Anamnese Detalhada:</strong> O médico deve investigar seus hábitos alimentares, rotina de sono, níveis de estresse emocional, medicamentos de uso contínuo, doenças recentes e detalhar o padrão de calvície nos seus familiares de primeiro e segundo grau.
+            </li>
+            <li>
+              <strong>Tricoscopia Digital:</strong> O uso de um dermatoscópio acoplado a uma câmera de alta resolução diretamente no couro cabeludo. O exame permite ao profissional medir o diâmetro médio dos fios, quantificar a presença de miniaturização (fios de espessuras variadas no mesmo campo), observar sinais de inflamação perifolicular e avaliar a densidade por centímetro quadrado.
+            </li>
+            <li>
+              <strong>Exames Laboratoriais Direcionados:</strong> Para excluir causas metabólicas e nutricionais, o médico deve dosar: Hemograma, Ferritina, Perfil de Ferro, Zinco, Vitamina D, Vitamina B12, Hormônios da Tireoide (TSH e T4 livre), Testosterona Total e Livre, DHT, SHBG e DHEA-S.
+            </li>
+          </ol>
+
+          <div class="alert-box info">
+            <div class="alert-box-title">📸 DICA PRÁTICA: O REGISTRO DE FOTOS PADRONIZADO</div>
+            O espelho é um péssimo avaliador de resultados porque nos vemos todos os dias e não notamos pequenas mudanças graduais. Crie um álbum de fotos capilar no celular. A cada 30 dias, tire fotos do seu couro cabeludo sob as mesmas condições: <strong>mesmo local físico, mesma iluminação (preferencialmente luz natural indireta ou sob um ponto de luz fixo), mesma câmera e com o cabelo seco ou molhado da mesma forma</strong>. Tire fotos de frente, de cima (coroa) e das duas laterais. Comparar a foto do mês 0 com a do mês 6 é o melhor termômetro do seu progresso.
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Capítulo 10 →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER 10: CHECKLIST DE AÇÃO -->
+      <section class="ebook-chapter" id="cap10">
+        <span class="chapter-number">Capítulo 10</span>
+        <h2 class="chapter-title">Checklist de ação prática</h2>
+        <div class="chapter-body">
+          <p>
+            Para facilitar a sua organização, compile uma lista de ações e atitudes organizadas em ordem cronológica de importância para guiar a sua rotina a partir de hoje. Utilize a ferramenta de checklist interativa na barra lateral para monitorar seus hábitos diários!
+          </p>
+          
+          <h3>Sua Linha do Tempo de Ação:</h3>
+          <ul>
+            <li>
+              <strong>Imediato (Semana 1):</strong>
+              <ul>
+                <li>Marcar consulta presencial com dermatologista focado em tricologia.</li>
+                <li>Tirar a primeira série de fotos padronizadas do couro cabeludo (Mês 0).</li>
+                <li>Suspender o uso de receitas caseiras mirabolantes sem embasamento (como aplicar alho ou pasta de dente na raiz).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Curto Prazo (Meses 1 a 3):</strong>
+              <ul>
+                <li>Realizar os exames laboratoriais solicitados pelo médico e iniciar as correções nutricionais necessárias.</li>
+                <li>Inserir na rotina a higienização regular do couro cabeludo (lavar diariamente ou em dias alternados para reduzir sebo).</li>
+                <li>Se prescrito Minoxidil, preparar-se mentalmente para o efeito <em>shedding</em> inicial nas primeiras semanas, sem interromper o tratamento.</li>
+                <li>Realizar a massagem capilar irrigadora de 4 minutos ao menos 3 a 4 vezes por semana (utilize o timer da barra lateral).</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Médio Prazo (Meses 4 a 6):</strong>
+              <ul>
+                <li>Avaliar a primeira grande comparação de fotos (Mês 0 vs Mês 6). Procurar por fios novos surgindo nas bordas e melhora na cobertura geral.</li>
+                <li>Retornar ao dermatologista para reavaliação de tricoscopia comparativa e ajuste de dosagens de medicamentos.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter">Conclusão →</button>
+        </div>
+      </section>
+
+      <!-- CHAPTER: CONCLUSAO -->
+      <section class="ebook-chapter" id="conclusao">
+        <span class="chapter-number">Encerramento</span>
+        <h2 class="chapter-title">Conclusão</h2>
+        <div class="chapter-body">
+          <p>
+            A calvície e a queda de cabelo não são falhas de caráter, falta de higiene ou sinal de envelhecimento precoce descontrolado. São manifestações da nossa biologia celular e genética respondendo ao ambiente e aos hormônios.
+          </p>
+          <p>
+            Compreender os mecanismos de crescimento do fio, desmitificar promessas falsas de resultados rápidos e aceitar que o processo exige tempo e disciplina é a chave para vencer essa batalha. Hoje, mais do que em qualquer outra época, a medicina e a tricologia possuem ferramentas reais, comprovadas e seguras capazes de estancar a queda, recuperar fios que estavam finos e devolver a autoconfiança de olhar-se no espelho com satisfação.
+          </p>
+          <p>
+            Esperamos que este guia digital "Cabelo Forte" sirva de bússola na sua jornada de cuidados. O conhecimento está em suas mãos. O próximo passo, simples e fundamental, é agir com segurança e buscar a orientação médica adequada.
+          </p>
+          <p style="text-align: center; margin-top: 40px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--primary);">
+            Cabelos fortes começam com escolhas inteligentes.
+          </p>
+          <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="btn-start" style="text-align: center;">Voltar para a Página Inicial</a>
+          </div>
+        </div>
+        <div class="chapter-footer-nav">
+          <button class="btn-nav-chapter btn-prev-chapter">← Anterior</button>
+          <button class="btn-nav-chapter btn-next-chapter" style="visibility: hidden;">Próximo →</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="ebook-script.js"></script>
+</body>
+</html>

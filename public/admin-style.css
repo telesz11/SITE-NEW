@@ -1,0 +1,267 @@
+/* ADMIN GENERAL STYLES */
+.admin-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.admin-header {
+  background-color: var(--primary-dark);
+  border-bottom: 2px solid var(--accent-gold);
+  padding: 20px 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.admin-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header .logo {
+  color: var(--white);
+}
+
+.admin-title-badge {
+  background-color: rgba(197, 168, 128, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid rgba(197, 168, 128, 0.3);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-main {
+  padding: 40px 24px;
+}
+
+/* STATS GRID */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.admin-card {
+  background-color: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: var(--transition);
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.admin-card-icon {
+  font-size: 2.25rem;
+  background-color: var(--accent-gold-light);
+  border-radius: 12px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(197, 168, 128, 0.15);
+}
+
+.admin-card-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.admin-card-value {
+  font-size: 1.75rem;
+  color: var(--primary-dark);
+}
+
+/* CONFIG CARD */
+.config-card {
+  grid-column: span 1;
+}
+
+.price-input-group {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-light);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin-top: 5px;
+}
+
+.currency-prefix {
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-right: 5px;
+}
+
+#input-price {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  width: 80px;
+}
+
+.btn-price-save {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.price-status-msg {
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  font-weight: 600;
+  min-height: 15px;
+}
+
+.price-status-msg.success {
+  color: var(--accent-mint);
+}
+
+.price-status-msg.error {
+  color: #ef4444;
+}
+
+/* TABS SECTION */
+.admin-content-tabs {
+  background-color: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.admin-tabs-header {
+  display: flex;
+  background-color: var(--bg-light);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.admin-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 20px 30px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+
+.admin-tab-btn:hover {
+  color: var(--primary);
+}
+
+.admin-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--accent-gold);
+  background-color: var(--white);
+}
+
+.admin-tab-content {
+  display: none;
+  padding: 30px;
+}
+
+.admin-tab-content.active {
+  display: block;
+}
+
+/* TABLE STYLING */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--primary-dark);
+  border-bottom: 2px solid var(--card-border);
+  padding: 15px;
+  font-size: 0.95rem;
+}
+
+.admin-table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(14, 58, 47, 0.04);
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover {
+  background-color: rgba(14, 58, 47, 0.01);
+}
+
+.sales-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-pix {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--accent-mint);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-card {
+  background-color: rgba(197, 168, 128, 0.1);
+  color: var(--accent-gold-hover);
+  border: 1px solid rgba(197, 168, 128, 0.2);
+}
+
+.badge-boleto {
+  background-color: rgba(100, 116, 139, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.sales-access {
+  background-color: var(--bg-light);
+  border: 1px dashed var(--card-border);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--primary);
+  display: inline-block;
+}

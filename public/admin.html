@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo | Cabelo Forte</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+
+  <!-- ADMIN HEADER -->
+  <header class="admin-header">
+    <div class="admin-container admin-header-flex">
+      <a href="/" class="logo">
+        <div class="logo-icon">C</div>
+        CABELO<span>FORTE</span>
+      </a>
+      <div class="admin-title-badge">Painel do Administrador</div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD WRAPPER -->
+  <main class="admin-container admin-main">
+    
+    <!-- STATS CARDS -->
+    <section class="admin-stats-grid">
+      <!-- CARD 1 -->
+      <div class="admin-card">
+        <div class="admin-card-icon">💰</div>
+        <div class="admin-card-content">
+          <p class="admin-card-label">Receita Total</p>
+          <h3 class="admin-card-value" id="stat-revenue">R$ 0,00</h3>
+        </div>
+      </div>
+      <!-- CARD 2 -->
+      <div class="admin-card">
+        <div class="admin-card-icon">🛒</div>
+        <div class="admin-card-content">
+          <p class="admin-card-label">Vendas Realizadas</p>
+          <h3 class="admin-card-value" id="stat-sales-count">0</h3>
+        </div>
+      </div>
+      <!-- CARD 3 -->
+      <div class="admin-card">
+        <div class="admin-card-icon">👥</div>
+        <div class="admin-card-content">
+          <p class="admin-card-label">Leads Capturados</p>
+          <h3 class="admin-card-value" id="stat-leads-count">0</h3>
+        </div>
+      </div>
+      <!-- CARD 4: PRICE CONFIG -->
+      <div class="admin-card config-card">
+        <div class="admin-card-icon">⚙️</div>
+        <div class="admin-card-content">
+          <p class="admin-card-label">Configuração de Preço</p>
+          <div class="price-input-group">
+            <span class="currency-prefix">R$</span>
+            <input type="number" id="input-price" step="0.01" min="1.00" value="37.90">
+            <button class="btn btn-mint btn-price-save" id="btn-save-price">Salvar</button>
+          </div>
+          <span id="price-status" class="price-status-msg"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLES SECTION -->
+    <section class="admin-content-tabs">
+      <div class="admin-tabs-header">
+        <button class="admin-tab-btn active" data-tab="tab-sales">Lista de Vendas</button>
+        <button class="admin-tab-btn" data-tab="tab-leads">Lista de Leads</button>
+      </div>
+
+      <!-- SALES TAB -->
+      <div class="admin-tab-content active" id="tab-sales">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>E-mail / Telefone</th>
+                <th>Método</th>
+                <th>Valor</th>
+                <th>Acesso Gerado</th>
+              </tr>
+            </thead>
+            <tbody id="sales-list-body">
+              <tr>
+                <td colspan="6" class="text-center text-muted">Carregando dados de vendas...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LEADS TAB -->
+      <div class="admin-tab-content" id="tab-leads">
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Data de Captura</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+              </tr>
+            </thead>
+            <tbody id="leads-list-body">
+              <tr>
+                <td colspan="3" class="text-center text-muted">Carregando dados de leads...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="admin-script.js"></script>
+</body>
+</html>
