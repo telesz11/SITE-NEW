@@ -25,6 +25,57 @@ function Save-Db($db) {
     $db | ConvertTo-Json -Depth 100 | Out-File -FilePath $dbPath -Encoding utf8
 }
 
+# Enviar evento de servidor para a API de Conversões da Meta (CAPI)
+function Send-MetaEvent($eventName, $email, $name) {
+    $pixelId = [System.Environment]::GetEnvironmentVariable("META_PIXEL_ID")
+    if (-not $pixelId) { $pixelId = "3374358562732931" }
+    $accessToken = [System.Environment]::GetEnvironmentVariable("META_ACCESS_TOKEN")
+    
+    if (-not $accessToken) {
+        Write-Host "[Meta CAPI] Evento $eventName simulado localmente (Sem META_ACCESS_TOKEN configurado)." -ForegroundColor Yellow
+        return
+    }
+    
+    # Hashing SHA-256 para cumprir os requisitos de privacidade da Meta
+    $hasher = [System.Security.Cryptography.HashAlgorithm]::Create("SHA256")
+    
+    $emailClean = $email.Trim().ToLower()
+    $emailBytes = [System.Text.Encoding]::UTF8.GetBytes($emailClean)
+    $emailHash = [System.BitConverter]::ToString($hasher.ComputeHash($emailBytes)).Replace("-", "").ToLower()
+    
+    $nameClean = $name.Trim().ToLower()
+    $nameBytes = [System.Text.Encoding]::UTF8.GetBytes($nameClean)
+    $nameHash = [System.BitConverter]::ToString($hasher.ComputeHash($nameBytes)).Replace("-", "").ToLower()
+    
+    $unixTime = [Math]::Floor([decimal](Get-Date -UFormat %s))
+    
+    $bodyObj = @{
+        data = @(
+            @{
+                event_name = $eventName
+                event_time = $unixTime
+                event_source_url = "http://localhost:3500/"
+                action_source = "website"
+                user_data = @{
+                    em = @($emailHash)
+                    fn = @($nameHash)
+                }
+            }
+        )
+    }
+    
+    $json = $bodyObj | ConvertTo-Json -Depth 10
+    
+    try {
+        $url = "https://graph.facebook.com/v17.0/$pixelId/events?access_token=$accessToken"
+        $headers = @{ "Content-Type" = "application/json" }
+        Invoke-RestMethod -Uri $url -Method Post -Headers $headers -Body $json
+        Write-Host "[Meta CAPI] Evento $eventName enviado com sucesso!" -ForegroundColor Green
+    } catch {
+        Write-Host "[Meta CAPI] Erro ao enviar evento: $_" -ForegroundColor Red
+    }
+}
+
 # Inicia o HttpListener do .NET
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://localhost:$port/")
@@ -93,6 +144,10 @@ while ($listener.IsListening) {
                     }
                     $db.leads = @($newLead) + $db.leads
                     Save-Db $db
+                    
+                    # Dispara evento da API de Conversões da Meta
+                    Send-MetaEvent -eventName "Lead" -email $leadReq.email -name $leadReq.name
+                    
                     $json = @{ message = "Lead capturado com sucesso!"; lead = $newLead } | ConvertTo-Json
                 }
                 $buffer = [System.Text.Encoding]::UTF8.GetBytes($json)

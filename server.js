@@ -2,6 +2,65 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('./database');
+const crypto = require('crypto');
+const https = require('https');
+
+// Função de Hashing SHA-256 para cumprir os requisitos de privacidade da Meta
+function sha256(text) {
+  if (!text) return null;
+  return crypto.createHash('sha256').update(text.trim().toLowerCase()).digest('hex');
+}
+
+// Enviar evento de servidor para a API de Conversões da Meta (CAPI)
+function sendMetaConversionEvent(eventName, userData, sourceUrl) {
+  const PIXEL_ID = process.env.META_PIXEL_ID || '3374358562732931';
+  const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+  
+  if (!ACCESS_TOKEN) {
+    console.log(`[Meta CAPI] Evento ${eventName} simulado localmente (Sem META_ACCESS_TOKEN configurado).`);
+    return;
+  }
+
+  const payload = JSON.stringify({
+    data: [
+      {
+        event_name: eventName,
+        event_time: Math.floor(Date.now() / 1000),
+        event_source_url: sourceUrl || '',
+        action_source: 'website',
+        user_data: {
+          em: userData.email ? [sha256(userData.email)] : [],
+          fn: userData.name ? [sha256(userData.name)] : []
+        }
+      }
+    ]
+  });
+
+  const options = {
+    hostname: 'graph.facebook.com',
+    path: `/v17.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': payload.length
+    }
+  };
+
+  const req = https.request(options, (res) => {
+    let body = '';
+    res.on('data', (chunk) => body += chunk);
+    res.on('end', () => {
+      console.log(`[Meta CAPI] Status: ${res.statusCode}. Resposta:`, body);
+    });
+  });
+
+  req.on('error', (e) => {
+    console.error('[Meta CAPI] Erro ao enviar evento:', e.message);
+  });
+
+  req.write(payload);
+  req.end();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -42,6 +101,11 @@ app.post('/api/leads', (req, res) => {
   
   try {
     const newLead = db.addLead({ name, email });
+    
+    // Meta Conversions API (Server-side)
+    const sourceUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    sendMetaConversionEvent('Lead', { email, name }, sourceUrl);
+    
     res.status(201).json({ message: 'Lead capturado com sucesso!', lead: newLead });
   } catch (error) {
     res.status(500).json({ error: 'Erro interno ao salvar lead' });

@@ -157,6 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
           leadMessage.textContent = 'Guia e dicas enviadas com sucesso!';
           leadMessage.style.color = 'var(--accent-mint)';
           leadForm.reset();
+          
+          // Meta Pixel Tracking
+          if (typeof fbq === 'function') {
+            fbq('track', 'Lead', {
+              content_name: 'Guia de Prevencao Cabelo Forte',
+              status: 'success'
+            });
+          }
         } else {
           leadMessage.textContent = result.error || 'Erro ao cadastrar. Tente novamente.';
           leadMessage.style.color = '#ef4444';
@@ -231,5 +239,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === policyModal) {
       policyModal.classList.remove('open');
     }
+  });
+
+  // Track click on Kiwify Checkout links (Initiate Checkout)
+  document.querySelectorAll('a[href*="pay.kiwify.com.br"]').forEach(button => {
+    button.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: 'Metodo Cabelo Forte',
+          value: 37.90,
+          currency: 'BRL'
+        });
+      }
+    });
   });
 });
